@@ -1,4 +1,7 @@
-def RCDistribution(year = 1996, plot = False, testGender = False, measureTime = False):
+def checkForDays():
+    pass
+
+def RCDistribution(year = 1996, plot = False, measureTime = False):
     """
     Takes a year and checks for possible rodna cisla within each day of the year
     :param year: A year to check for possibilities
@@ -23,44 +26,38 @@ def RCDistribution(year = 1996, plot = False, testGender = False, measureTime = 
     #dict to store possible combinations of rodne cislo within a year
     dayPossibilities = {}
 
-    #initialize dictionary for storing the values for female versions
-    if testGender:
-        dayPossibilitiesWoman = {}
 
-    #generates all possible 4 digit numbers to test with the before slash component (length of 6561)
-    for i in itertools.product([str(i) for i in xrange(1,10)], repeat=4):
-        afterSlash.append(''.join(i))
+    #generates all possible 3 digit numbers to test with the before slash component (length of 6561)
+    afterSlash = []
+    for i in itertools.product([str(i) for i in xrange(0,10)], repeat=4): 
+        afterSlash.append(''.join(i))          # add that shit to the list
 
-
+     
+    
     if measureTime:
         start = time.clock()
 
     #dictionary with number of days per month
-    daysDict = {"1":"31","2":"28","3":"31","4":"30","5":"31","6":"30","7":"31","8":"31","9":"30","10":"31","11":"30","11":"31","12":"30"}
+    daysDict = {"01":"31","02":"28","03":"31","04":"30","05":"31","06":"30","07":"31","08":"31","09":"30","10":"31","11":"30","11":"31","12":"30"}
 
 
     for month in daysDict.keys():
-        for day in range(int(daysDict[month])):
+        for day in range(int(daysDict[month])+1)[1:]:
+            if len(str(day)) == 1:
+                dayChanged = "0"+str(day)
+            else:
+                dayChanged = day
             possibilities = 0
-            beforeSlash = str(year) + str(int(month)+50) + str(day)
+            beforeSlash = str(year) + str(month) + str(dayChanged)
+            print "Before slash = " + beforeSlash
             for combination in afterSlash:
+                print "After slash: " + combination
                 rc = beforeSlash + combination
-                if int(rc) % 11 == 0:
+                print rc
+                if int(rc[:9])%11==int(rc[9]):
                     possibilities += 1
             dayPossibilities[beforeSlash] = possibilities
 
-    if testGender:
-        for month in daysDict.keys():
-        #print "month: " + month
-            for day in range(int(daysDict[month])):
-                #print "Day: " + str(day)
-                possibilities = 0
-                beforeSlash = str(year) + str(int(month)+50) + str(day)
-                for combination in afterSlash:
-                    rc = beforeSlash + combination
-                    if int(rc) % 11 == 0:
-                        possibilities += 1
-                dayPossibilitiesWoman[beforeSlash] = possibilities
 
     if measureTime:
         print str((time.clock() - start))
@@ -70,11 +67,7 @@ def RCDistribution(year = 1996, plot = False, testGender = False, measureTime = 
         pylab.ylim(0,1200)
         pylab.ylim(0,366)
         pylab.plot(dayPossibilities.values())
-        if testGender:
-            pylab.plot(dayPossibilitiesWoman.values())
 
         pylab.show()
 
-    if testGender:
-        return (dayPossibilities, dayPossibilitiesWoman)
     return dayPossibilities
