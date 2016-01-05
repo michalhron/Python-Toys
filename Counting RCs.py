@@ -68,6 +68,7 @@ def RCDistribution(year = 1996, plot = False, testGender = False, measureTime = 
     if plot:
         pylab.figure()
         pylab.ylim(0,1200)
+        pylab.ylim(0,366)
         pylab.plot(dayPossibilities.values())
         if testGender:
             pylab.plot(dayPossibilitiesWoman.values())
@@ -77,4 +78,3 @@ def RCDistribution(year = 1996, plot = False, testGender = False, measureTime = 
     if testGender:
         return (dayPossibilities, dayPossibilitiesWoman)
     return dayPossibilities
-
