@@ -65,7 +65,7 @@ def RCDistribution(year = 1996, plot = False, measureTime = False):
     if plot:
         pylab.figure()
         pylab.ylim(0,1200)
-        pylab.ylim(0,366)
+        pylab.xlim(0,366)
         pylab.plot(dayPossibilities.values())
 
         pylab.show()
