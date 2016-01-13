@@ -80,3 +80,5 @@ def plotYear(year = 1993):
     pylab.title("Possibilities for male rodna cisla in year " + str(year))
     pylab.plot(dayPossibilities.values())
     pylab.show()
+
+    return None
