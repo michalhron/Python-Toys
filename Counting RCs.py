@@ -1,7 +1,7 @@
 def Join(touple):
     """
     takes a touple and returns str concatenating all elements within the touple
-    :param sixgrams: A touple to be concatenated
+    :param touple: A touple to be concatenated
     :return: string
     """
     result = ""
@@ -19,16 +19,16 @@ def checkDate(beforeSlash = "931020"):
     import itertools
     possibilities = []
 
+    #converting to str if need be
     if type(beforeSlash) != str:
         beforeSlash = str(beforeSlash)
 
+    #checking the length of the argument, needs to be 6 characters long
     assert (len(beforeSlash)==6), "Incorrent length of the input argument"
 
-
     for combination in itertools.product([str(i) for i in xrange(0,10)], repeat=3):
-        comb = (' '.join(i) for i in combination)
         RC = str(beforeSlash)
-        RC += Join(comb)
+        RC += Join(combination)
         remainder = int(RC)%11
         if remainder == 10:
             remainder = 0
@@ -36,7 +36,7 @@ def checkDate(beforeSlash = "931020"):
 
         if RC not in possibilities:
             possibilities.append(RC)
-    print beforeSlash + ": " + str(len(possibilities)) + " possibilities."
+    #print beforeSlash + ": " + str(len(possibilities)) + " possibilities."
     return len(possibilities)
 
 def checkYear(year= 1993):
@@ -77,5 +77,6 @@ def plotYear(year = 1993):
     pylab.figure()
     pylab.ylim(0,1200)
     pylab.xlim(1,366)
-    pylab.title("Posiibilities for male rodna cisla in year " + str(year))
+    pylab.title("Possibilities for male rodna cisla in year " + str(year))
     pylab.plot(dayPossibilities.values())
+    pylab.show()
