@@ -1,0 +1,17 @@
+{
+    "contents" : "count <- 1\n\nfor (element in document$features$properties$LOKALITA){\n      if (grepl(\"metro\", tolower(element))){\n            count <- count + 1\n      }\n}",
+    "created" : 1452768442003.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "4099496321",
+    "id" : "DA5F67D3",
+    "lastKnownWriteTime" : 4345755648,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

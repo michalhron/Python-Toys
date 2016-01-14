@@ -1,21 +1,21 @@
 {
     "contents" : "",
-    "created" : 1452764749285.000,
+    "created" : 1452768340182.000,
     "dirty" : false,
     "encoding" : "",
     "folds" : "",
     "hash" : "0",
-    "id" : "B3F05156",
-    "lastKnownWriteTime" : 0,
+    "id" : "86C29056",
+    "lastKnownWriteTime" : 4345707264,
     "path" : null,
     "project_path" : null,
     "properties" : {
         "caption" : "df",
-        "contentUrl" : "content?title=df&file=9576afc125c84ceba0bf3920bec1d9b6.htm",
+        "contentUrl" : "content?title=df&file=e903b06f570e4105b66efa67794a8a64.htm",
         "displayedObservations" : "247",
-        "displayedVariables" : 3,
+        "displayedVariables" : 4,
         "totalObservations" : "247",
-        "variables" : "2"
+        "variables" : "6"
     },
     "source_on_save" : false,
     "type" : "r_dataframe"

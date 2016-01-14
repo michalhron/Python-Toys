@@ -28,13 +28,26 @@ for (number in 1:length(document$features$geometry$coordinates)){
 
 df$Lat <- lats
 df$Long <- longs
+df$Vozickari <- as.vector(document$features$properties$VOZICKARI)
+
+#CENA
+CENA <- logical()
+
+#
+for (number in 1:lengtah(document$features$properties$CENA)){
+      CENA <- append(CENA,document$features$properties$CENA[number]=="zdarma")
+}
+pie(table(CENA))
 
 
+WCmap <- get_map(location = c(mean(df$Long),mean(df$Lat)), zoom = 11, maptype = "watercolor", scale = 4)
 
 
-WCmap <- get_map(location = c(mean(df$Long),mean(df$Lat)), zoom = 12, maptype = "watercolor", scale = 4)
 
 # plotting the map with some points on it
-ggmap(WCmap) +
-      geom_point(data = df, aes(x = Long, y = Lat, fill = "red", alpha = 0.8), size = 5, shape = 21) +
+p <- ggmap(WCmap) +
+      geom_point(data = df, aes(x = Long, y = Lat, fill = Vozickari, alpha = 1.0), size = 4, shape = 1) +
       guides(fill=FALSE, alpha=FALSE, size=FALSE)
+      
+p + scale_colour_manual(values = c("red", "green"))
+      

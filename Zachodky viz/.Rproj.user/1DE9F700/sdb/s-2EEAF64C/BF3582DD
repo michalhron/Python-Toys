@@ -1,12 +1,12 @@
 {
-    "contents" : "library(\"jsonlite\")\nlibrary(RgoogleMaps)\nlibrary(ggplot2)\nlibrary(ggmap)\n\n\nurl <- \"http://opendata.iprpraha.cz/CUR/FSV/FSV_VerejnaWC_b/WGS_84/FSV_VerejnaWC_b.json\"\ndownload.file(url, \"data.json\")\n\ndocument <- fromJSON(url)\n\n\ndf = data.frame(matrix(vector(), length(document$features$geometry$coordinates), 2,\n                       dimnames=list(c(), c(\"Lat\", \"Long\"))),\n                stringsAsFactors=F)\n\nlats = numeric()\nlongs = numeric()\n\n\nfor (number in 1:length(document$features$geometry$coordinates)){\n      pair <-  as.vector(document$features$geometry$coordinates[number][[1]])\n      \n      lats <- append(lats,as.numeric(pair[2]))\n      longs <- append(longs,as.numeric(pair[1]))\n\n}\n\ndf$Lat <- lats\ndf$Long <- longs\n\n\n\n\nWCmap <- get_map(location = c(mean(df$Long),mean(df$Lat)), zoom = 12, maptype = \"watercolor\", scale = 4)\n\n# plotting the map with some points on it\nggmap(WCmap) +\n      geom_point(data = df, aes(x = Long, y = Lat, fill = \"red\", alpha = 0.8), size = 5, shape = 21) +\n      guides(fill=FALSE, alpha=FALSE, size=FALSE)\n",
+    "contents" : "library(\"jsonlite\")\nlibrary(RgoogleMaps)\nlibrary(ggplot2)\nlibrary(ggmap)\n\n\nurl <- \"http://opendata.iprpraha.cz/CUR/FSV/FSV_VerejnaWC_b/WGS_84/FSV_VerejnaWC_b.json\"\ndownload.file(url, \"data.json\")\n\ndocument <- fromJSON(url)\n\n\ndf = data.frame(matrix(vector(), length(document$features$geometry$coordinates), 2,\n                       dimnames=list(c(), c(\"Lat\", \"Long\"))),\n                stringsAsFactors=F)\n\nlats = numeric()\nlongs = numeric()\n\n\nfor (number in 1:length(document$features$geometry$coordinates)){\n      pair <-  as.vector(document$features$geometry$coordinates[number][[1]])\n      \n      lats <- append(lats,as.numeric(pair[2]))\n      longs <- append(longs,as.numeric(pair[1]))\n\n}\n\ndf$Lat <- lats\ndf$Long <- longs\ndf$Vozickari <- as.vector(document$features$properties$VOZICKARI)\n\n#CENA\nCENA <- logical()\n\n#\nfor (number in 1:lengtah(document$features$properties$CENA)){\n      CENA <- append(CENA,document$features$properties$CENA[number]==\"zdarma\")\n}\npie(table(CENA))\n\n\nWCmap <- get_map(location = c(mean(df$Long),mean(df$Lat)), zoom = 11, maptype = \"watercolor\", scale = 4)\n\n\n\n# plotting the map with some points on it\np <- ggmap(WCmap) +\n      geom_point(data = df, aes(x = Long, y = Lat, fill = Vozickari, alpha = 1.0), size = 4, shape = 1) +\n      guides(fill=FALSE, alpha=FALSE, size=FALSE)\n      \np + scale_colour_manual(values = c(\"red\", \"green\"))\n      ",
     "created" : 1452759654042.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2492207610",
+    "hash" : "3785964600",
     "id" : "BF3582DD",
-    "lastKnownWriteTime" : 1452766002,
+    "lastKnownWriteTime" : 1452806183,
     "path" : "~/GIT/Toys/Zachodky viz/zachodky plot.R",
     "project_path" : "zachodky plot.R",
     "properties" : {
