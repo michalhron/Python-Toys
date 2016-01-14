@@ -1,0 +1,17 @@
+{
+    "contents" : "library(\"jsonlite\")\nlibrary(RgoogleMaps)\nlibrary(ggplot2)\nlibrary(ggmap)\n\n\nurl <- \"http://opendata.iprpraha.cz/CUR/FSV/FSV_VerejnaWC_b/WGS_84/FSV_VerejnaWC_b.json\"\ndownload.file(url, \"data.json\")\n\ndocument <- fromJSON(url)\n\n\ndf = data.frame(matrix(vector(), length(document$features$geometry$coordinates), 2,\n                       dimnames=list(c(), c(\"Lat\", \"Long\"))),\n                stringsAsFactors=F)\n\nlats = numeric()\nlongs = numeric()\n\n\nfor (number in 1:length(document$features$geometry$coordinates)){\n      pair <-  as.vector(document$features$geometry$coordinates[number][[1]])\n      \n      lats <- append(lats,as.numeric(pair[2]))\n      longs <- append(longs,as.numeric(pair[1]))\n\n}\n\ndf$Lat <- lats\ndf$Long <- longs\n\n\n\n\nWCmap <- get_map(location = c(mean(df$Long),mean(df$Lat)), zoom = 12, maptype = \"watercolor\", scale = 4)\n\n# plotting the map with some points on it\nggmap(WCmap) +\n      geom_point(data = df, aes(x = Long, y = Lat, fill = \"red\", alpha = 0.8), size = 5, shape = 21) +\n      guides(fill=FALSE, alpha=FALSE, size=FALSE)\n",
+    "created" : 1452759654042.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2492207610",
+    "id" : "BF3582DD",
+    "lastKnownWriteTime" : 1452766002,
+    "path" : "~/GIT/Toys/Zachodky viz/zachodky plot.R",
+    "project_path" : "zachodky plot.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
